@@ -52,12 +52,14 @@ func (control *gameControlUsecase) Start() {
 			detail := event.Details.(*entity.AddPlayerEvent)
 			game.AddPlayer(*entity.NewPlayer(detail.Username))
 		case entity.End:
-			// TODO: The log shows inconsistencies, new games are initiated without properly closing the previous ones.
 			control.generateReports(*game)
 			game = nil
 		case entity.Init:
 			if game != nil {
-				control.logger.Error("New Game Without End Previous")
+				// TODO: The log shows inconsistencies, new games are initiated without properly finish the previous ones.
+				control.logger.Error("New game without properly finish the previous one", line)
+				control.generateReports(*game)
+				game = nil
 			}
 			gameCount++
 			game = entity.NewGame(gameCount)

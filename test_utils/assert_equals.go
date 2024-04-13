@@ -12,18 +12,14 @@ func AssertEquals(t *testing.T, expected, actual interface{}) {
 		actualValue, ok := actual.(int)
 		if !ok {
 			t.Errorf("Expected int, got %T", actual)
-			return
-		}
-		if expectedValue != actualValue {
+		} else if expectedValue != actualValue {
 			t.Errorf("Expected %d, got %d", expectedValue, actualValue)
 		}
 	case string:
 		actualValue, ok := actual.(string)
 		if !ok {
 			t.Errorf("Expected string, got %T", actual)
-			return
-		}
-		if expectedValue != actualValue {
+		} else if expectedValue != actualValue {
 			t.Errorf("Expected %q, got %q", expectedValue, actualValue)
 		}
 	default:

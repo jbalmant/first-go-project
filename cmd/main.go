@@ -25,5 +25,5 @@ func main() {
 	gameControlUsecase.Start()
 
 	endTime := time.Now()
-	fmt.Println("Elapsed Time: ", endTime.Sub(startTime))
+	logger.Info(fmt.Sprintf("Elapsed Time: %v", endTime.Sub(startTime)))
 }

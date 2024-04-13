@@ -21,22 +21,24 @@ func NewLogger(level LogLevel) *Logger {
 	return &Logger{level: level}
 }
 
-func (l *Logger) log(level LogLevel, message string) {
+func (l *Logger) log(level LogLevel, message string, args ...interface{}) {
 	if l.level <= level {
-		fmt.Printf("[%s] %s: %s\n", time.Now().Format("2006-01-02 15:04:05"), levelString(level), message)
+		timeNow := time.Now().Format("2006-01-02 15:04:05")
+		formattedMessage := fmt.Sprintf(message, args...)
+		fmt.Printf("[%s] %s: %s\n", timeNow, levelString(level), formattedMessage)
 	}
 }
 
-func (l *Logger) Info(message string) {
-	l.log(INFO, message)
+func (l *Logger) Info(message string, args ...interface{}) {
+	l.log(INFO, message, args...)
 }
 
-func (l *Logger) Warning(message string) {
-	l.log(WARNING, message)
+func (l *Logger) Warning(message string, args ...interface{}) {
+	l.log(WARNING, message, args...)
 }
 
-func (l *Logger) Error(message string) {
-	l.log(ERROR, message)
+func (l *Logger) Error(message string, args ...interface{}) {
+	l.log(ERROR, message, args...)
 }
 
 func levelString(level LogLevel) string {

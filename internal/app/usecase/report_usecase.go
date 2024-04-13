@@ -98,7 +98,7 @@ func (report *causeOfDeathReportUsecase) Generate(game entity.Game) Report {
 	killsByMean := make(map[string]int, 0)
 
 	for _, kill := range game.ListKills() {
-		killsByMean[kill.CauseOfDeath]++
+		killsByMean[kill.CauseOfDeath]++ //? Should I check if the cause of deaths exists on the Quake3 enum?
 	}
 
 	result := &Report{
