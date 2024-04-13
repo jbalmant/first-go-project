@@ -1,18 +1,22 @@
 package main
 
 import (
-	"MyFirstModule/internal/app/usecase"
-	"MyFirstModule/pkg"
+	"flag"
 	"fmt"
 	"time"
+
+	"MyFirstModule/internal/app/usecase"
+	"MyFirstModule/pkg"
 )
 
 func main() {
 	startTime := time.Now()
-
 	logger := pkg.NewLogger(pkg.INFO)
 
-	fileReaderEventDispatcher := usecase.NewFileReaderEventDispatcher(*logger, "./assets/qgames.log")
+	path := flag.String("path", "./assets/qgames.log", "The file path with logs")
+	flag.Parse()
+
+	fileReaderEventDispatcher := usecase.NewFileReaderEventDispatcher(*logger, *path)
 	quake3Parser := usecase.NewQuake3Parser()
 	gameDetailReport := usecase.NewGameDetailsReportUsecase(usecase.NewFileReportDelivery())
 	causeOfDeathReport := usecase.NewCauseOfDeathReportUsecase(usecase.NewFileReportDelivery())

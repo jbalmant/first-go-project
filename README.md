@@ -1,11 +1,20 @@
-# first-go-project
+# My First Go Project
 
 My first Go project: parsing Quake 3 log files to generate reports.
 
-## Running the Project
+## Usage
 
-To run the project, make sure you have Go installed on your system. Then, clone the project repository, navigate to the project directory, and run the following command:
+To run the project:
 
 ```bash
-go run ./cmd
+make run  # Use default file
+make run PATH=<path_to_your_file.log>
+```
+
+## Running the Tests
+
+To run the tests, execute the following command:
+
+```bash
+make test
 ```
