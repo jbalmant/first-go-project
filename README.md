@@ -18,3 +18,7 @@ To run the tests, execute the following command:
 ```bash
 make test
 ```
+
+## Basic workflow example
+
+![Basic Workflow](assets/basic-worflow-example.png "Basic Workflow Example")
