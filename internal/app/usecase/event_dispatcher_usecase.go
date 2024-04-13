@@ -1,9 +1,12 @@
 package usecase
 
 import (
-	"MyFirstModule/pkg"
 	"bufio"
 	"os"
+
+	"MyFirstModule/internal/app/entity"
+	"MyFirstModule/internal/app/infrastructure"
+	"MyFirstModule/pkg"
 )
 
 type EventListener func(string)
@@ -14,21 +17,21 @@ type eventDispatcherUsecase interface {
 }
 
 type fileReaderEventDispatcher struct {
-	logger       pkg.Logger
-	eventHandler EventListener
-	filePath     string
+	logger   pkg.Logger
+	eventBus infrastructure.EventBus
+	filePath string
 }
 
-func NewFileReaderEventDispatcher(logger pkg.Logger, filePath string) *fileReaderEventDispatcher {
+func NewFileReaderEventDispatcher(logger pkg.Logger, eventBus infrastructure.EventBus, filePath string) *fileReaderEventDispatcher {
 	return &fileReaderEventDispatcher{
-		logger:       logger,
-		eventHandler: nil,
-		filePath:     filePath,
+		logger:   logger,
+		eventBus: eventBus,
+		filePath: filePath,
 	}
 }
 
 func (fileReader *fileReaderEventDispatcher) SetEventHandler(eventHandler EventListener) {
-	fileReader.eventHandler = eventHandler
+	// fileReader.eventHandler = eventHandler
 }
 
 func (fileReader *fileReaderEventDispatcher) Start() {
@@ -41,6 +44,8 @@ func (fileReader *fileReaderEventDispatcher) Start() {
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
-		fileReader.eventHandler(line)
+		fileReader.eventBus.Publish(entity.EventBusRawGameEvent, line)
+
+		// fileReader.eventHandler(line)
 	}
 }

@@ -1,8 +1,9 @@
 package usecase
 
 import (
-	"MyFirstModule/internal/app/entity"
 	"testing"
+
+	"MyFirstModule/internal/app/entity"
 )
 
 func TestMapLogToAddUserEventShouldPanicWhenPatternDoesNotMatch(t *testing.T) {

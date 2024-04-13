@@ -1,8 +1,10 @@
 package usecase
 
 import (
-	"MyFirstModule/internal/app/entity"
 	"regexp"
+
+	"MyFirstModule/internal/app/entity"
+	"MyFirstModule/internal/app/infrastructure"
 )
 
 type EventType string
@@ -20,7 +22,7 @@ type parserUsecase interface {
 
 type quake3Parser struct{}
 
-func NewQuake3Parser() *quake3Parser {
+func NewQuake3Parser(eventBus infrastructure.EventBus) *quake3Parser {
 	return &quake3Parser{}
 }
 

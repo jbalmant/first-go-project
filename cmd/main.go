@@ -1,10 +1,12 @@
 package main
 
 import (
-	"MyFirstModule/internal/app/usecase"
-	"MyFirstModule/pkg"
 	"fmt"
 	"time"
+
+	"MyFirstModule/internal/app/infrastructure"
+	"MyFirstModule/internal/app/usecase"
+	"MyFirstModule/pkg"
 )
 
 func main() {
@@ -12,8 +14,10 @@ func main() {
 
 	logger := pkg.NewLogger(pkg.INFO)
 
-	fileReaderEventDispatcher := usecase.NewFileReaderEventDispatcher(*logger, "./assets/qgames.log")
-	quake3Parser := usecase.NewQuake3Parser()
+	eventBus := infrastructure.NewEventBus(*logger)
+
+	fileReaderEventDispatcher := usecase.NewFileReaderEventDispatcher(*logger, *eventBus, "./assets/qgames.log")
+	quake3Parser := usecase.NewQuake3Parser(eventBus)
 	gameDetailReport := usecase.NewGameDetailsReportUsecase(usecase.NewFileReportDelivery())
 	causeOfDeathReport := usecase.NewCauseOfDeathReportUsecase(usecase.NewFileReportDelivery())
 

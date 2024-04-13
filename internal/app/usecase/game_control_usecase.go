@@ -17,7 +17,6 @@ func NewGameControlUsecase(
 	eventDispatcher eventDispatcherUsecase,
 	parser parserUsecase,
 	reports []ReportUsecase,
-
 ) *gameControlUsecase {
 	return &gameControlUsecase{
 		logger:          logger,

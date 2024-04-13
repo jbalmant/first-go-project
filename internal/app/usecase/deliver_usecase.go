@@ -22,7 +22,7 @@ func NewFileReportDelivery() *fileReportDelivery {
 }
 
 func (fr *fileReportDelivery) Deliver(report Report) {
-	file, err := os.OpenFile(fmt.Sprintf("%v-%v.txt", report.Name, fr.timestamp.Format("2006_01_02_15_04_05")), os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0644)
+	file, err := os.OpenFile(fmt.Sprintf("%v-%v.txt", report.Name, fr.timestamp.Format("2006_01_02_15_04_05")), os.O_WRONLY|os.O_APPEND|os.O_CREATE, 0o644)
 	if err != nil {
 		panic("Deliver - An error occurred when opening the file")
 	}
