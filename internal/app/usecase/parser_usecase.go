@@ -1,8 +1,9 @@
 package usecase
 
 import (
-	"MyFirstModule/internal/app/entity"
 	"regexp"
+
+	"MyFirstModule/internal/app/entity"
 )
 
 type EventType string
@@ -43,7 +44,7 @@ func mapLogToAddUserEvent(eventLine string) *entity.Event {
 		panic("AddUserEvent pattern does not match")
 	}
 
-	return entity.NewAddUserEvent(
+	return entity.NewAddPlayerEvent(
 		submatches[1],
 	)
 }

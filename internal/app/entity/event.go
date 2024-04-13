@@ -3,10 +3,10 @@ package entity
 type EventType string
 
 const (
-	AddUser EventType = "AddUser"
-	End     EventType = "End"
-	Init    EventType = "Init"
-	Kill    EventType = "Kill"
+	AddPlayer EventType = "AddUser"
+	End       EventType = "End"
+	Init      EventType = "Init"
+	Kill      EventType = "Kill"
 )
 
 type Event struct {
@@ -20,28 +20,26 @@ func NewAction(eventType EventType) *Event {
 	}
 }
 
-type AddUserEvent struct {
+type AddPlayerEvent struct {
 	Username string
 }
 
-func NewAddUserEvent(username string) *Event {
+func NewAddPlayerEvent(username string) *Event {
 	return &Event{
-		Type: AddUser,
-		Details: &AddUserEvent{
+		Type: AddPlayer,
+		Details: &AddPlayerEvent{
 			Username: username,
 		},
 	}
 }
 
-type EndGameEvent struct {
-}
+type EndGameEvent struct{}
 
 func NewEndGameEvent() *Event {
 	return &Event{Type: End}
 }
 
-type InitGameEvent struct {
-}
+type InitGameEvent struct{}
 
 func NewInitGameEvent() *Event {
 	return &Event{Type: Init}

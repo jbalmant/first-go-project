@@ -17,7 +17,6 @@ func NewGameControlUsecase(
 	eventDispatcher eventDispatcherUsecase,
 	parser parserUsecase,
 	reports []ReportUsecase,
-
 ) *gameControlUsecase {
 	return &gameControlUsecase{
 		logger:          logger,
@@ -46,11 +45,11 @@ func (control *gameControlUsecase) Start() {
 		}
 
 		switch event.Type {
-		case entity.AddUser:
+		case entity.AddPlayer:
 			if game == nil {
 				panic("Adding user to a null game")
 			}
-			detail := event.Details.(*entity.AddUserEvent)
+			detail := event.Details.(*entity.AddPlayerEvent)
 			game.AddPlayer(*entity.NewPlayer(detail.Username))
 		case entity.End:
 			// TODO: The log shows inconsistencies, new games are initiated without properly closing the previous ones.
